@@ -11,6 +11,11 @@ $routes = [
     "/admin/users"             => "controllers/admin/users.php",
     "/admin/users/action"      => "controllers/admin/user-action.php",
 
+    "/admin/schedules"         => "controllers/admin/schedule/index.php",
+    "/admin/schedule/create"   => "controllers/admin/schedule/create.php",
+    "/admin/schedule/edit"     => "controllers/admin/schedule/edit.php",
+    "/admin/schedule/delete"   => "controllers/admin/schedule/delete.php",
+
     "/faculty"                  => "controllers/faculty/index.php",
     // "/faculty/create"           => "controllers/faculty/create.php",
     "/faculty/edit"             => "controllers/faculty/edit.php",
@@ -49,6 +54,7 @@ $routes = [
     "/admin/section/create"    => "controllers/admin/section/create.php",
     "/admin/section/edit"      => "controllers/admin/section/edit.php",
     "/admin/section/delete"    => "controllers/admin/section/delete.php",
+
 ];
 
 function routesToController($uri, $routes)

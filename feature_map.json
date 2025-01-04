@@ -1,0 +1,91 @@
+{
+    "room_crud": [
+      "controllers/admin/room/create.php",
+      "controllers/admin/room/edit.php",
+      "controllers/admin/room/delete.php",
+      "controllers/admin/room/index.php",
+      "views/admin/room/create.view.php",
+      "views/admin/room/edit.view.php",
+      "views/admin/room/index.view.php"
+    ],
+    "school_year_crud": [
+      "controllers/admin/school-year/create.php",
+      "controllers/admin/school-year/edit.php",
+      "controllers/admin/school-year/delete.php",
+      "controllers/admin/school-year/index.php",
+      "views/admin/school-year/create.view.php",
+      "views/admin/school-year/edit.view.php",
+      "views/admin/school-year/index.view.php"
+    ],
+    "section_crud": [
+      "controllers/admin/section/create.php",
+      "controllers/admin/section/edit.php",
+      "controllers/admin/section/delete.php",
+      "controllers/admin/section/index.php",
+      "views/admin/section/create.view.php",
+      "views/admin/section/edit.view.php",
+      "views/admin/section/index.view.php"
+    ],
+    "semester_crud": [
+      "controllers/admin/semester/create.php",
+      "controllers/admin/semester/edit.php",
+      "controllers/admin/semester/delete.php",
+      "controllers/admin/semester/index.php",
+      "views/admin/semester/create.view.php",
+      "views/admin/semester/edit.view.php",
+      "views/admin/semester/index.view.php"
+    ],
+    "subject_crud": [
+      "controllers/admin/subject/create.php",
+      "controllers/admin/subject/edit.php",
+      "controllers/admin/subject/delete.php",
+      "controllers/admin/subject/index.php",
+      "views/admin/subject/create.view.php",
+      "views/admin/subject/edit.view.php",
+      "views/admin/subject/index.view.php"
+    ],
+    "users_crud": [
+      "controllers/admin/users.php",
+      "controllers/admin/user-action.php",
+      "views/admin/users.view.php"
+    ],
+    "faculty_crud": [
+      "controllers/faculty/index.php",
+      "controllers/faculty/edit.php",
+      "controllers/faculty/delete.php",
+      "views/faculty/index.view.php",
+      "views/faculty/edit.view.php",
+      "views/faculty/create.view.php"
+    ],
+    "auth": [
+      "controllers/auth/login.php",
+      "controllers/auth/logout.php",
+      "controllers/auth/register.php",
+      "views/auth/login.view.php",
+      "views/auth/register.view.php"
+    ],
+    "profile": [
+      "controllers/profile/complete.php",
+      "views/profile/complete.view.php"
+    ],
+    "home_and_pending": [
+      "controllers/index.php",
+      "views/index.view.php",
+      "views/pending.view.php"
+    ],
+    "db_and_config": [
+      "Database.php",
+      "config.php",
+      "acad_schedule_db.sql"
+    ],
+    "utils": [
+      "functions.php",
+      "router.php",
+      "file.php",
+      "seed_admin.php",
+      "views/partials/head.php",
+      "views/partials/foot.php",
+      "views/partials/nav.php"
+    ]
+  }
+  

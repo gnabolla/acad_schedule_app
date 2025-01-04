@@ -55,6 +55,17 @@ $routes = [
     "/admin/section/edit"      => "controllers/admin/section/edit.php",
     "/admin/section/delete"    => "controllers/admin/section/delete.php",
 
+    "/admin/departments"          => "controllers/admin/department/index.php",
+    "/admin/department/create"    => "controllers/admin/department/create.php",
+    "/admin/department/edit"      => "controllers/admin/department/edit.php",
+    "/admin/department/delete"    => "controllers/admin/department/delete.php",
+
+    // Programs
+    "/admin/programs"          => "controllers/admin/program/index.php",
+    "/admin/program/create"    => "controllers/admin/program/create.php",
+    "/admin/program/edit"      => "controllers/admin/program/edit.php",
+    "/admin/program/delete"    => "controllers/admin/program/delete.php",
+
 ];
 
 function routesToController($uri, $routes)

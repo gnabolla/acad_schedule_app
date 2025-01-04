@@ -12,6 +12,8 @@
             <a href="/admin/rooms">Manage Rooms</a> |
             <a href="/admin/subjects">Manage Subjects</a> |
             <a href="/admin/sections">Manage Sections</a> |
+            <a href="/admin/departments">Manage Departments</a> |
+            <a href="/admin/programs">Manage Programs</a> |
             <a href="/admin/schedules">Manage Schedules</a> |
         <?php endif; ?>
         <a href="/logout">Logout</a>

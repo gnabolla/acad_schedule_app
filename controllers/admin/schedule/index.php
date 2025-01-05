@@ -30,7 +30,35 @@ $rooms = $db->query("
     ORDER BY name
 ")->fetchAll();
 
-$programs = $db->query("SELECT id, name FROM programs ORDER BY name")->fetchAll();
-$departments = $db->query("SELECT id, name FROM departments ORDER BY name")->fetchAll();
+$programs = $db->query("
+    SELECT p.id, p.name, p.department_id, d.name AS department_name
+    FROM programs p
+    JOIN departments d ON p.department_id = d.id
+    ORDER BY p.name
+")->fetchAll();
+
+$departments = $db->query("
+    SELECT id, name
+    FROM departments
+    ORDER BY name
+")->fetchAll();
+
+$schoolYears = $db->query("
+    SELECT id, name
+    FROM school_years
+    ORDER BY name
+")->fetchAll();
+
+$semesters = $db->query("
+    SELECT id, label, sy_id
+    FROM semesters
+    ORDER BY label
+")->fetchAll();
+
+$subjects = $db->query("
+    SELECT id, code, description
+    FROM subjects
+    ORDER BY code
+")->fetchAll();
 
 require 'views/admin/schedule/index.view.php';

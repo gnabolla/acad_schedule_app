@@ -1,98 +1,115 @@
 <?php include 'views/partials/head.php'; ?>
 
-<!-- Include jQuery & jQuery UI (adjust versions/CDN URLs as needed) -->
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/smoothness/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 
-<?php
-$viewTypeSelected = $_GET['viewType'] ?? '';
-$selectedId       = $_GET['selectedId'] ?? '';
-?>
+<h1>Manage Schedules</h1>
 
-<h1>Manage Schedules (Autocomplete)</h1>
-
-<form method="GET" action="/admin/schedules" style="margin-bottom:1rem;">
-  <label for="viewType">View By:</label>
-  <select name="viewType" id="viewType" required>
-    <option value="">-- Choose One --</option>
-    <option value="faculty" <?= $viewTypeSelected === 'faculty' ? 'selected' : '' ?>>Faculty</option>
-    <option value="section" <?= $viewTypeSelected === 'section' ? 'selected' : '' ?>>Section</option>
-    <option value="room"    <?= $viewTypeSelected === 'room'    ? 'selected' : '' ?>>Room</option>
+<form method="GET" style="margin-bottom:1rem;">
+  <label for="schoolYear">School Year:</label>
+  <select name="school_year_id" id="schoolYear">
+    <option value="">-- Choose Year --</option>
+    <?php foreach ($schoolYears as $sy): ?>
+      <option value="<?= $sy['id'] ?>"><?= $sy['name'] ?></option>
+    <?php endforeach; ?>
   </select>
 
-  <label for="autocompleteInput">Search:</label>
-  <input type="text" id="autocompleteInput" />
-  
-  <!-- Hidden input to store the chosen ID -->
-  <input type="hidden" id="hiddenId" name="selectedId" value="<?= htmlspecialchars($selectedId) ?>" />
+  <label for="semester">Semester:</label>
+  <select name="semester_id" id="semester">
+    <option value="">-- Choose Semester --</option>
+    <?php foreach ($semesters as $sem): ?>
+      <option value="<?= $sem['id'] ?>" data-sy="<?= $sem['sy_id'] ?>">
+        <?= $sem['label'] ?>
+      </option>
+    <?php endforeach; ?>
+  </select>
 
-  <button type="submit">Display</button>
+  <label for="program">Program:</label>
+  <select name="program_id" id="program">
+    <option value="">-- Choose Program --</option>
+    <?php foreach ($programs as $prog): ?>
+      <option value="<?= $prog['id'] ?>" data-deptid="<?= $prog['department_id'] ?>">
+        <?= $prog['name'] ?>
+      </option>
+    <?php endforeach; ?>
+  </select>
+
+  <label for="department">Department:</label>
+  <select name="department_id" id="department">
+    <option value="">-- Department --</option>
+    <?php foreach ($departments as $dept): ?>
+      <option value="<?= $dept['id'] ?>"><?= $dept['name'] ?></option>
+    <?php endforeach; ?>
+  </select>
+
+  <label for="faculty">Faculty:</label>
+  <select name="faculty_id" id="faculty">
+    <option value="">-- Choose Faculty --</option>
+    <?php foreach ($faculties as $f): ?>
+      <option value="<?= $f['id'] ?>">
+        <?= $f['lastname'] . ', ' . $f['firstname'] ?>
+      </option>
+    <?php endforeach; ?>
+  </select>
+
+  <label for="subject">Subject:</label>
+  <select name="subject_id" id="subject">
+    <option value="">-- Choose Subject --</option>
+    <?php foreach ($subjects as $sub): ?>
+      <option value="<?= $sub['id'] ?>">
+        <?= $sub['code'] ?> - <?= $sub['description'] ?>
+      </option>
+    <?php endforeach; ?>
+  </select>
+
+  <label for="section">Section:</label>
+  <select name="section_id" id="section">
+    <option value="">-- Choose Section --</option>
+    <?php foreach ($sections as $sec): ?>
+      <option value="<?= $sec['id'] ?>"><?= $sec['section'] ?></option>
+    <?php endforeach; ?>
+  </select>
+
+  <label for="room">Room:</label>
+  <select name="room_id" id="room">
+    <option value="">-- Choose Room --</option>
+    <?php foreach ($rooms as $r): ?>
+      <option value="<?= $r['id'] ?>"><?= $r['name'] ?></option>
+    <?php endforeach; ?>
+  </select>
+
+  <button type="submit" style="margin-left:1rem;">Filter Schedules</button>
 </form>
 
 <script>
-  // These arrays are populated from your controller (already fetched from DB).
-  const facultiesData = <?= json_encode($faculties) ?>;
-  const sectionsData  = <?= json_encode($sections) ?>;
-  const roomsData     = <?= json_encode($rooms) ?>;
-
-  const viewTypeSelected = '<?= $viewTypeSelected ?>';
-  const storedId         = '<?= $selectedId ?>';
-
-  let currentData = [];
-
-  function rebuildData(type) {
-    if (type === 'faculty') {
-      return facultiesData.map(f => ({
-        label: f.lastname + ', ' + f.firstname,
-        value: f.id
-      }));
-    } else if (type === 'section') {
-      return sectionsData.map(s => ({
-        label: s.section,
-        value: s.id
-      }));
-    } else if (type === 'room') {
-      return roomsData.map(r => ({
-        label: r.name,
-        value: r.id
-      }));
-    }
-    return [];
-  }
-
-  $('#autocompleteInput').autocomplete({
-    minLength: 0,
-    source: currentData,
-    select: function(event, ui) {
-      event.preventDefault();
-      $('#autocompleteInput').val(ui.item.label);
-      $('#hiddenId').val(ui.item.value);
-    },
-    focus: function(event, ui) {
-      event.preventDefault();
-      $('#autocompleteInput').val(ui.item.label);
-    }
+  // Populate department based on selected program
+  $('#program').on('change', function() {
+    const deptId = $(this).find(':selected').data('deptid');
+    $('#department').val(deptId || '');
   });
 
-  function updateAutocomplete(type) {
-    currentData = rebuildData(type);
-    $('#autocompleteInput').autocomplete('option', 'source', currentData);
-  }
+  // Retain dropdown selections via localStorage
+  document.addEventListener('DOMContentLoaded', () => {
+    const dropdowns = [
+      'schoolYear', 'semester', 'program', 'department',
+      'faculty', 'subject', 'section', 'room'
+    ];
 
-  updateAutocomplete(viewTypeSelected);
-
-  if (storedId) {
-    const found = currentData.find(item => String(item.value) === String(storedId));
-    if (found) {
-      $('#autocompleteInput').val(found.label);
-    }
-  }
-
-  $('#viewType').on('change', function() {
-    updateAutocomplete(this.value);
-    $('#autocompleteInput').val('');
-    $('#hiddenId').val('');
+    dropdowns.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        // Load from localStorage
+        const savedValue = localStorage.getItem(id);
+        if (savedValue !== null) {
+          el.value = savedValue;
+        }
+        // Save on change
+        el.addEventListener('change', () => {
+          localStorage.setItem(id, el.value);
+        });
+      }
+    });
   });
 </script>
 
@@ -143,7 +160,6 @@ $selectedId       = $_GET['selectedId'] ?? '';
   }
 </style>
 
-<!-- Timetable -->
 <div id="timetable" class="timetable-container">
   <div class="timetable-row">
     <div class="time-label"></div>
@@ -183,7 +199,6 @@ $selectedId       = $_GET['selectedId'] ?? '';
   <?php endforeach; ?>
 </div>
 
-<!-- Selected Range -->
 <div>
   <strong>Selected Day:</strong> <span id="selectedDay">—</span><br>
   <strong>Start Time:</strong> <span id="startTime">—</span><br>

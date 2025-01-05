@@ -3,7 +3,7 @@ require 'Database.php';
 $config = require 'config.php';
 $db = new Database($config['database'], 'root', '');
 
-// Fetch schedules
+// Fetch schedules (for display, if needed)
 $schedules = $db->query("
     SELECT s.*, f.firstname AS faculty_name, f.lastname AS faculty_lname, r.name AS room_name
     FROM schedules s
@@ -13,19 +13,19 @@ $schedules = $db->query("
 
 // Fetch master data
 $faculties = $db->query("
-    SELECT id, firstname, middlename, lastname 
+    SELECT id, firstname, middlename, lastname
     FROM faculties
     ORDER BY lastname, firstname
 ")->fetchAll();
 
 $sections = $db->query("
-    SELECT id, section 
+    SELECT id, section
     FROM sections
     ORDER BY section
 ")->fetchAll();
 
 $rooms = $db->query("
-    SELECT id, name 
+    SELECT id, name
     FROM rooms
     ORDER BY name
 ")->fetchAll();

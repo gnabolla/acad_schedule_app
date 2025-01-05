@@ -9,6 +9,14 @@ require 'Database.php';
 $config = require 'config.php';
 $db = new Database($config['database']);
 
-// Fetch all programs
-$programs = $db->query("SELECT * FROM programs ORDER BY id DESC")->fetchAll();
+// Updated to join departments for department name
+$sql = "
+    SELECT p.*, d.name AS department_name
+    FROM programs p
+    LEFT JOIN departments d ON p.department_id = d.id
+    ORDER BY p.id DESC
+";
+$programs = $db->query($sql)->fetchAll();
+
 require 'views/admin/program/index.view.php';
+

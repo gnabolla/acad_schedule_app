@@ -6,8 +6,7 @@ $routes = [
     "/login"                   => "controllers/auth/login.php",
     "/logout"                  => "controllers/auth/logout.php",
     "/register"                => "controllers/auth/register.php",
-    "/profile/faculty-complete" => "controllers/profile/complete.php",
-    "/profile/student-complete" => "controllers/profile/student-complete.php",
+    "/profile/complete" => "controllers/profile/complete.php",
     "/admin/users"             => "controllers/admin/users.php",
     "/admin/users/action"      => "controllers/admin/user-action.php",
 

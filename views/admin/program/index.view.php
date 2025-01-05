@@ -5,6 +5,7 @@
     <thead>
         <tr>
             <th>ID</th>
+            <th>Department</th>
             <th>Name</th>
             <th>Description</th>
             <th>Actions</th>
@@ -14,6 +15,7 @@
     <?php foreach ($programs as $p): ?>
         <tr>
             <td><?= $p['id'] ?></td>
+            <td><?= htmlspecialchars($p['department_name'] ?? '—') ?></td>
             <td><?= htmlspecialchars($p['name']) ?></td>
             <td><?= htmlspecialchars($p['description'] ?? '') ?></td>
             <td>

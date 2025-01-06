@@ -1,5 +1,4 @@
 <?php include 'views/partials/head.php'; ?>
-
 <h1>Welcome</h1>
 <p>
     <?php if (isset($_SESSION['user_id'])): ?>
@@ -16,10 +15,13 @@
             <a href="/admin/programs">Manage Programs</a> |
             <a href="/admin/schedules">Manage Schedules</a> |
         <?php endif; ?>
+        
+        <!-- Added link to edit profile here -->
+        <a href="/profile/edit">Edit My Profile</a> |  
         <a href="/logout">Logout</a>
     <?php else: ?>
-        <a href="/login">Login</a> | <a href="/register">Register</a>
+        <a href="/login">Login</a> | 
+        <a href="/register">Register</a>
     <?php endif; ?>
 </p>
-
 <?php include 'views/partials/foot.php'; ?>

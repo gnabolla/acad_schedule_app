@@ -65,6 +65,7 @@ $routes = [
     "/admin/program/edit"      => "controllers/admin/program/edit.php",
     "/admin/program/delete"    => "controllers/admin/program/delete.php",
 
+    "/profile/edit" => "controllers/profile/edit.php",
 ];
 
 function routesToController($uri, $routes)
